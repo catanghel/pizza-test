@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6">
+        <li ng-repeat="item in nameList">{{item.no}} x {{item.name}}
+          <span class="pull-right ingredient-actions">
+            <i class="fa fa-minus" ng-click="remove(item._id, true)"></i>
+            <i class="fa fa-trash" ng-click="remove(item._id)"></i>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

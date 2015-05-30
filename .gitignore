@@ -1,0 +1,11 @@
+node_modules
+public
+.tmp
+.idea
+client/bower_components
+dist
+e2e
+server
+/server/config/local.env.js
+
+Gruntfile.js
