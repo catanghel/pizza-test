@@ -7,3 +7,5 @@ server
 /server/config/local.env.js
 
 Gruntfile.js
+
+dist
