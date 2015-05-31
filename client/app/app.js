@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('pizzaApp', [
-  'ngCookies',
+/*  'ngCookies',
   'ngResource',
-  'ngSanitize',
+  'ngSanitize',*/
   'ui.router',
   'ui.bootstrap'
 ])

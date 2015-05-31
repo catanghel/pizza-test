@@ -8,6 +8,11 @@ angular.module('pizzaApp')
       get: getIngredients
     };
 
+    /*
+     * Gets one or all of the ingredients
+     * @param {String} [id]
+     * @returns {Promise}
+     * */
     function getIngredients (id) {
       var addToPath = (id ? '/' + id : '');
       var request = $http({
@@ -20,6 +25,11 @@ angular.module('pizzaApp')
       return( request.then( handleSuccess, handleError ) );
     }
 
+    /*
+     * Handles error
+     * @param {Object} response
+     * @returns {Promise}
+     * */
     function handleError( response ) {
       if (!angular.isObject( response.data ) || !response.data.message) {
         return( $q.reject( "An unknown error occurred." ) );
@@ -27,6 +37,11 @@ angular.module('pizzaApp')
       return( $q.reject( response.data.message ) );
     }
 
+    /*
+     * Handles success
+     * @param {Object} response
+     * @returns {Promise}
+     * */
     function handleSuccess( response ) {
       return( response.data );
     }

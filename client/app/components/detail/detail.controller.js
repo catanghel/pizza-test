@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pizzaApp')
-  .controller('DetailCtrl', function ($scope, $stateParams, pizza, ingredient) {
+  .controller('DetailCtrl', function ($scope, $stateParams, pizza, ingredient, $state) {
     var pizzaId = $stateParams.pizzaId;
 
     $scope.pizza = {};
@@ -21,19 +21,48 @@ angular.module('pizzaApp')
       }
     );
 
-    $scope.addIngredient = function(id) {
+    /*
+     * Adds an ingredient to the pizza
+     * @param {String} id
+     * */
+    $scope.addIngredient = function (id) {
       if (id) {
         $scope.pizza.ingredients.push(id);
       }
     };
 
+    /*
+     * Saves the pizza
+     * */
     $scope.save = function () {
-      if (validate)
-      if ($scope.pizza._id) {
-        pizza.update($scope.pizza);
+      if (validate()) {
+        if ($scope.pizza._id) {
+          pizza.update($scope.pizza).then(
+            function (data) {
+              $state.go('main');
+            }
+          );
+        } else {
+          pizza.create($scope.pizza).then(
+            function (data) {
+              $state.go('main');
+            }
+          );
+        }
       } else {
-        pizza.create($scope.pizza);
+        alert("Please use at least one ingredient for this pizza")
       }
+    };
+
+    /*
+     * Validates the number of ingredients
+     * */
+    function validate() {
+      var isValid = true;
+      if (!$scope.pizza.ingredients.length) {
+        isValid = false;
+      }
+      return isValid;
     }
 
   });

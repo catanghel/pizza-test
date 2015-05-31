@@ -10,6 +10,11 @@ angular.module('pizzaApp')
       remove: removePizza
     };
 
+    /*
+     * Gets one or all of the pizzas
+     * @param {String} [id]
+     * @returns {Promise}
+     * */
     function getPizzas (id) {
       var addToPath = (id ? '/' + id : '');
       var request = $http({
@@ -22,6 +27,11 @@ angular.module('pizzaApp')
       return( request.then( handleSuccess, handleError ) );
     }
 
+    /*
+     * Creates a new pizza
+     * @param {Object} config
+     * @returns {Promise}
+     * */
     function createPizza (config) {
       var request = $http({
         method: 'POST',
@@ -34,6 +44,11 @@ angular.module('pizzaApp')
       return( request.then( handleSuccess, handleError ) );
     }
 
+    /*
+     * Updates a pizza
+     * @param {Object} config
+     * @returns {Promise}
+     * */
     function updatePizza (config) {
       var id = config._id;
       var request = $http({
@@ -47,6 +62,11 @@ angular.module('pizzaApp')
       return( request.then( handleSuccess, handleError ) );
     }
 
+    /*
+     * Removes a pizza
+     * @param {String} [id]
+     * @returns {Promise}
+     * */
     function removePizza (id) {
       var request = $http({
         method: 'DELETE',
@@ -58,6 +78,11 @@ angular.module('pizzaApp')
       return( request.then( handleSuccess, handleError ) );
     }
 
+    /*
+     * Handles error
+     * @param {Object} response
+     * @returns {Promise}
+     * */
     function handleError( response ) {
       if (!angular.isObject( response.data ) || !response.data.message) {
         return( $q.reject( "An unknown error occurred." ) );
@@ -65,6 +90,11 @@ angular.module('pizzaApp')
       return( $q.reject( response.data.message ) );
     }
 
+    /*
+     * Handles success
+     * @param {Object} response
+     * @returns {Promise}
+     * */
     function handleSuccess( response ) {
       return( response.data );
     }

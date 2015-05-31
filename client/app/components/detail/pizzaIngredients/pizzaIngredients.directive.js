@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pizzaApp')
-  .directive('pizzaIngredients', function (ingredient, $q) {
+  .directive('pizzaIngredients', function (ingredient, $q, $window) {
     return {
       templateUrl: 'app/components/detail/pizzaIngredients/pizzaIngredients.html',
       restrict: 'EA',
@@ -73,15 +73,17 @@ angular.module('pizzaApp')
          * */
         scope.remove = function (id, single) {
           var temp = angular.copy(scope.pizza.ingredients);
-
-          if (single) {
-            temp.splice(temp.indexOf(id), 1)
-          } else {
-            temp = temp.filter(
-              function(element) {
-                return element !== id;
-              }
-            );
+          var confirm = $window.confirm('Are you sure you want to remove this ingredient?');
+          if (confirm) {
+            if (single) {
+              temp.splice(temp.indexOf(id), 1)
+            } else {
+              temp = temp.filter(
+                function (element) {
+                  return element !== id;
+                }
+              );
+            }
           }
           scope.pizza.ingredients = temp;
         };
