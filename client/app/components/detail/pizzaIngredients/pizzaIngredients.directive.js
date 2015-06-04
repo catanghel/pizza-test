@@ -16,13 +16,48 @@ angular.module('pizzaApp')
           function (n, o, s) {
             if (n) {
               scope.list = n;
-              refreshList();
+              //refreshList();
+              refreshIngredientList();
             }
           }
         );
 
         /*
          * Refreshes the list of ingredients
+         * */
+        function refreshIngredientList() {
+          var i, j, ingredientsLength, listLenght = scope.list.length;
+          var ingredient = {}, listItem = {};
+          scope.ingredientsPromise.then(
+            function () {
+              ingredientsLength = scope.ingredients.length;
+              resetQuanities();
+              for (i = 0; i < listLenght; i++) {
+                listItem = scope.list[i];
+                for (j = 0; j < ingredientsLength; j++) {
+                  ingredient = scope.ingredients[j];
+                  if (listItem === ingredient._id) {
+                    ingredient.no += 1;
+                  }
+                }
+              }
+            }
+          );
+        }
+
+        /*
+         * Refreshes the list of ingredients
+         * */
+        function resetQuanities () {
+          var i, length = scope.ingredients.length;
+          for (i = 0; i < length; i++) {
+            scope.ingredients[i].no = 0;
+          }
+        }
+
+        /*
+         * Refreshes the list of ingredients
+         * @deprecated use refreshIngredientList() instead
          * */
         function refreshList() {
           var a = checkOccurrences(scope.list);
@@ -46,6 +81,7 @@ angular.module('pizzaApp')
 
         /*
          * Checks occurrences of each ingredient
+         * @deprecated not used any more
          * @param {Array<String>} arr
          * @returns {Array<String><Number>}
          * */

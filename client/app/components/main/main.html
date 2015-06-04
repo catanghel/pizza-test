@@ -12,7 +12,7 @@
         <div class="col-lg-4 col-md-4 col-sm-1 col-xs-12"></div>
         <ul class="pizza-list col-md-4 col-lg-4 col-sm-10 col-xs-12">
           <li ng-repeat="pizza in pizzas" ng-if="pizza.name">
-            <a ui-sref="detail({pizzaId: '{{pizza._id}}'})">{{pizza.name}}</a>
+            <a ui-sref="detail({pizzaId: '{{pizza._id}}'})" ng-click="updateCookie(pizza._id)">{{pizza.name}}</a>
             <i class="pull-right fa fa-trash" ng-click="removePizza(pizza._id)"></i>
           </li>
         </ul>

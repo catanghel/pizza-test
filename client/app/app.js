@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('pizzaApp', [
-/*  'ngCookies',
-  'ngResource',
+/*'ngResource',
   'ngSanitize',*/
+  'ngCookies',
   'ui.router',
   'ui.bootstrap'
 ])
@@ -17,5 +17,5 @@ angular.module('pizzaApp', [
     $urlRouterProvider
       .otherwise('/');
 
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
   });

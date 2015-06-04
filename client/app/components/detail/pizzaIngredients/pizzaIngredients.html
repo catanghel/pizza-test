@@ -3,7 +3,14 @@
     <div class="col-lg-3 col-md-2 col-sm-1 col-xs-12"></div>
     <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
       <ul class="nav nav-tabs nav-stacked ingredient-list">
-        <li ng-repeat="item in nameList">{{item.no}} x {{item.name}}
+        <!--<li ng-repeat="item in nameList">{{item.no}} x {{item.name}}
+          <span class="pull-right ingredient-actions">
+            <i class="fa fa-minus" ng-click="remove(item._id, true)"></i>
+            <i class="fa fa-trash" ng-click="remove(item._id)"></i>
+          </span>
+        </li>-->
+        <li ng-repeat="item in ingredients" ng-show="item.no">
+          {{item.no}} x {{item.name}}
           <span class="pull-right ingredient-actions">
             <i class="fa fa-minus" ng-click="remove(item._id, true)"></i>
             <i class="fa fa-trash" ng-click="remove(item._id)"></i>

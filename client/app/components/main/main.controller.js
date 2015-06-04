@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pizzaApp')
-  .controller('MainCtrl', function ($scope, pizza, $state, $window) {
+  .controller('MainCtrl', function ($scope, pizza, $state, $window, $cookies) {
     $scope.pizzas = [];
     loadPizzas();
 
@@ -9,6 +9,7 @@ angular.module('pizzaApp')
      * Redirects to the detail view
      * */
     $scope.newPizza = function () {
+      $cookies.put('pizzaId', '');
       $state.go('detail');
     };
 
@@ -25,6 +26,10 @@ angular.module('pizzaApp')
           }
         );
       }
+    };
+
+    $scope.updateCookie = function (value) {
+      $cookies.put('pizzaId', value);
     };
 
     /*

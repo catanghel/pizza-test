@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('pizzaApp')
-  .controller('DetailCtrl', function ($scope, $stateParams, pizza, ingredient, $state) {
-    var pizzaId = $stateParams.pizzaId;
+  .controller('DetailCtrl', function ($scope, $stateParams, pizza, ingredient, $state, $cookies) {
+    var pizzaId = $stateParams.pizzaId || $cookies.get('pizzaId');
 
     $scope.pizza = {};
     $scope.pizza.ingredients = [];
@@ -15,7 +15,7 @@ angular.module('pizzaApp')
     }
 
     $scope.ingredients = [];
-    ingredient.get().then(
+    $scope.ingredientsPromise = ingredient.get().then(
       function (data) {
         $scope.ingredients = data;
       }
@@ -39,12 +39,14 @@ angular.module('pizzaApp')
         if ($scope.pizza._id) {
           pizza.update($scope.pizza).then(
             function (data) {
+              $cookies.put('pizzaId', '');
               $state.go('main');
             }
           );
         } else {
           pizza.create($scope.pizza).then(
             function (data) {
+              $cookies.put('pizzaId', '');
               $state.go('main');
             }
           );
